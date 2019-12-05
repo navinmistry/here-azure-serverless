@@ -39,7 +39,7 @@ const loggers = require("../hereLibs/logger");
 // HERE credentials App_Code and App_Id
 const HERE_APP_CODE = process.env.HERE_APP_CODE;
 const HERE_APP_ID = process.env.HERE_APP_ID;
-
+const HERE_API_KEY = process.env.HERE_API_KEY;
 // Cosmos DB related parameters.
 const HERE_COSMOSDB_ENDPOINT = process.env.HERE_COSMOSDB_ENDPOINT;
 const HERE_COSMOSDB_KEY = process.env.HERE_COSMOSDB_KEY;
@@ -50,11 +50,15 @@ const HERE_EVENTHUB_NS_CONNECTIONSTRING = process.env.HERE_EVENTHUB_NS_CONNECTIO
 // DB ID and collection id.
 const DATABASE_ID = config.cosmosDB.databaseId;
 const CONTAINER_ID = config.cosmosDB.containerId;
-
+const authKey = function() {
+     if(HERE_API_KEY != "") { return true }
+     else { return false }
+    }
 var inputConfig = {
     "HERE_EVENTHUB_NS_CONNECTIONSTRING": HERE_EVENTHUB_NS_CONNECTIONSTRING,
     "HERE_APP_CODE": HERE_APP_CODE,
     "HERE_APP_ID": HERE_APP_ID,
+    "HERE_API_KEY" : HERE_API_KEY,
     "HERE_COSMOSDB_ENDPOINT": HERE_COSMOSDB_ENDPOINT,
     "HERE_COSMOSDB_KEY": HERE_COSMOSDB_KEY,
     "DATABASE_ID": DATABASE_ID,
@@ -93,7 +97,7 @@ module.exports = async function(context, eventHubMsg) {
 
     logger("Incoming request : ", JSON.stringify(request, null, 4));
     // Build HERE_API_URL from mapping.
-    if (!reqProcessor.buildHereApiUrl(request)) {
+    if (!reqProcessor.buildHereApiUrl(request,authKey())) {
         logger("[ERROR ] :HERE_API_URL Mapping not found for given api.");
         eventProcessor.createDBLog(logger, request);
         return;

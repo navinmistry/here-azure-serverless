@@ -2,10 +2,16 @@
     "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
+        "authType" :{
+            "type" : "string"
+        },
         "hereAPP_ID": {
             "type": "string"
         },
         "hereAPP_CODE": {
+            "type": "string"
+        },
+        "hereAPI_KEY": {
             "type": "string"
         },
         "storageAccountType": {
@@ -26,11 +32,13 @@
 
     },
     "variables": {
-        "nestedTemplateUri": "[uri(deployment().properties.templateLink.uri, 'nestedtemplates/azuredeploy.json')]",
+        "nestedTemplateApiKeyUri": "[uri(deployment().properties.templateLink.uri, 'nestedtemplates/azuredeploy.json')]",
+        "nestedTemplateAppIdUri": "[uri(deployment().properties.templateLink.uri, 'nestedtemplates/azuredeployappid.json')]",
         "functionZipPackageUrl": "[uri(deployment().properties.templateLink.uri, 'deployables/hlsTemplateWebAppBackend.zip')]"
 
     },
     "resources": [{
+        "condition": "[equals(parameters('authType'), 'apiKey')]",
         "type": "Microsoft.Resources/deployments",
         "apiVersion": "2018-02-01",
         "name": "pid-42755d19-4ad3-5fc0-a887-72ea2006a990",
@@ -38,7 +46,43 @@
             "mode": "Incremental",
             "templateLink": {
                 "contentVersion": "1.0.0.0",
-                "uri": "[variables('nestedTemplateUri')]"
+                "uri": "[variables('nestedTemplateApiKeyUri')]"
+            },
+            "parameters": {
+                "hereAPI_KEY": {
+                    "value": "[parameters('hereAPI_KEY')]"
+                },
+                "storageAccountType": {
+                    "value": "[parameters('storageAccountType')]"
+                },
+                "storageName": {
+                    "value": "[parameters('storageName')]"
+                },
+                "storageAccountNewOrExisting": {
+                    "value": "[parameters('storageAccountNewOrExisting')]"
+                },
+                "storageAccountExistingRG": {
+                    "value": "[parameters('storageAccountExistingRG')]"
+                },
+                "functionZipPackageUrl": {
+                    "value": "[variables('functionZipPackageUrl')]"
+                },
+                "location": {
+                    "value": "[parameters('location')]"
+                }
+            }
+        }
+    },
+    {
+        "condition": "[equals(parameters('authType'), 'appid_appcode')]",
+        "type": "Microsoft.Resources/deployments",
+        "apiVersion": "2018-02-01",
+        "name": "pid-42755d19-4ad3-5fc0-a887-72ea2006a990",
+        "properties": {
+            "mode": "Incremental",
+            "templateLink": {
+                "contentVersion": "1.0.0.0",
+                "uri": "[variables('nestedTemplateAppIdUri')]"
             },
             "parameters": {
                 "hereAPP_ID": {

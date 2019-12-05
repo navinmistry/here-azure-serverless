@@ -2,7 +2,7 @@
     "$schema": "https://schema.management.azure.com/schemas/2018-05-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-        "hereAPP_ID": {
+        "hereAPI_KEY": {
             "type": "String"
         },
         "hereAPP_CODE": {
@@ -212,12 +212,8 @@
                             "value": "8.11.1"
                         },
                         {
-                            "name": "HERE_APP_CODE",
-                            "value": "[parameters('hereAPP_CODE')]"
-                        },
-                        {
-                            "name": "HERE_APP_ID",
-                            "value": "[parameters('hereAPP_ID')]"
+                            "name": "HERE_API_KEY",
+                            "value": "[parameters('hereAPI_KEY')]"
                         },
                         {
                             "name": "HERE_COSMOSDB_ENDPOINT",
@@ -288,12 +284,8 @@
                             "value": "8.11.1"
                         },
                         {
-                            "name": "HERE_APP_CODE",
-                            "value": "[parameters('hereAPP_CODE')]"
-                        },
-                        {
-                            "name": "HERE_APP_ID",
-                            "value": "[parameters('hereAPP_ID')]"
+                            "name": "HERE_API_KEY",
+                            "value": "[parameters('hereAPI_KEY')]"
                         },
                         {
                             "name": "HERE_COSMOSDB_ENDPOINT",

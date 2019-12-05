@@ -3,18 +3,12 @@
   "contentVersion": "1.0.0.0",
   "parameters": {
     
-    "hereAPP_ID": {
+    "hereAPI_KEY": {
       "type": "String",
       "metadata": {
         "description": "For HERE Credentials, refer https://developer.here.com"
       }
-    },
-    "hereAPP_CODE": {
-      "type": "String",
-      "metadata": {
-        "description": "For HERE Credentials, refer https://developer.here.com"
-      }
-    }    
+    }   
   },
   "variables": {
     "functionZipPackageUrl" :"https://raw.githubusercontent.com/heremaps/here-azure-serverless/master/functionZips/hlsAPIRouting.zip",
@@ -78,12 +72,8 @@
               "value": "8.11.1"
             },
             {
-              "name": "HERE_APP_CODE",
-              "value": "[parameters('hereAPP_CODE')]"
-            },
-            {
-              "name": "HERE_APP_ID",
-              "value": "[parameters('hereAPP_ID')]"
+              "name": "HERE_API_KEY",
+              "value": "[parameters('hereAPI_KEY')]"
             }
           ]
         },

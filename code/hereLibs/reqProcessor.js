@@ -187,7 +187,6 @@ function processRequest(log, req, HERE_APP_CODE, HERE_APP_ID, HERE_API_URL) {
     // Log Environment Variable & Values.
     log(`[HERE_APP_ID]            : [${HERE_APP_ID}]`);
     log(`[HERE_APP_CODE]          : [${HERE_APP_CODE}]`);
-    log(`[HERE_API_URL]           : [${HERE_API_URL}]`);
 
     // Find the passed parameters in url.
     log(`[Original Query params]  : [${JSON.stringify(req.params[0])}]`);
@@ -214,6 +213,38 @@ function processRequest(log, req, HERE_APP_CODE, HERE_APP_ID, HERE_API_URL) {
 
     return proxy_url;
 }
+function processRequest(log, req, HERE_API_KEY, HERE_API_URL) {
+
+    // Log Environment Variable & Values.
+    log(`[HERE_API_KEY]            : [${HERE_API_KEY}]`);
+    log(`[HERE_API_URL]            : [${HERE_API_URL}]`);
+
+    // Find the passed parameters in url.
+    log(`[Original Query params]  : [${JSON.stringify(req.params[0])}]`);
+
+    log(`[Request Query String]   : [${JSON.stringify(req.query,null,4)}]`);
+    log(`[Request RAW QueryString]: [${req._parsedUrl.query}]`);
+
+    log(`[Request Method]         : [${req.method}]`);
+    log(`[Request ContentType]    : [${req.headers['content-type']}]`);
+
+    // Prepare proxy-URL ( for here api )
+    let here_query_string = req._parsedUrl.query;
+    if (req._parsedUrl.query == null) {
+        here_query_string = ""
+    }
+    let proxy_url = `${HERE_API_URL}${req.params[0]}?apikey=${HERE_API_KEY}` + "&" + here_query_string;
+
+    log(`[Orginal URL]            : [${JSON.stringify(req.url)}]`);
+
+    // Sanitize proxy URL, its requried for map-tile for now.
+    proxy_url = sanitizieUrl(proxy_url);
+    log(`[Proxy   URL]            : [${proxy_url}]`);
+    log(`[Proxy Body ]            : [${JSON.stringify(req.body,null,4)}]`);
+
+    return proxy_url;
+}
+
 
 function classifyRespFormat(req) {
     if (req.params != undefined) {
@@ -276,14 +307,32 @@ function sanitizieUrl(url) {
         return url.replace("maps.api.here.com/pano/", "maps.api.here.com/")
     } else if (url.indexOf("maps.api.here.com/traffic/") > 0) {
         return url.replace("maps.api.here.com/traffic/", "maps.api.here.com/")
-    } else if (url.indexOf("maps.api.here.com// aerial/") > 0) {
-        return url.replace("maps.api.here.com// aerial/", "maps.api.here.com/")
-    } else if (url.indexOf("maps.api.here.com// base/") > 0) {
-        return url.replace("maps.api.here.com// base/", "maps.api.here.com/")
-    } else if (url.indexOf("maps.api.here.com// pano/") > 0) {
-        return url.replace("maps.api.here.com// pano/", "maps.api.here.com/")
-    } else if (url.indexOf("maps.api.here.com// traffic/") > 0) {
-        return url.replace("maps.api.here.com// traffic/", "maps.api.here.com/")
+    } else if (url.indexOf("maps.api.here.com//aerial/") > 0) {
+        return url.replace("maps.api.here.com//aerial/", "maps.api.here.com/")
+    } else if (url.indexOf("maps.api.here.com//base/") > 0) {
+        return url.replace("maps.api.here.com//base/", "maps.api.here.com/")
+    } else if (url.indexOf("maps.api.here.com//pano/") > 0) {
+        return url.replace("maps.api.here.com//pano/", "maps.api.here.com/")
+    } else if (url.indexOf("maps.api.here.com//traffic/") > 0) {
+        return url.replace("maps.api.here.com//traffic/", "maps.api.here.com/")
+    } 
+    // URL supported for ApiKey 
+    else if (url.indexOf("maps.ls.hereapi.com/aerial/") > 0) {
+        return url.replace("maps.ls.hereapi.com/aerial/", "maps.ls.hereapi.com/")
+    } else if (url.indexOf("maps.ls.hereapi.com/base/") > 0) {
+        return url.replace("maps.ls.hereapi.com/base/", "maps.ls.hereapi.com/")
+    } else if (url.indexOf("maps.ls.hereapi.com/pano/") > 0) {
+        return url.replace("maps.ls.hereapi.com/pano/", "maps.ls.hereapi.com/")
+    } else if (url.indexOf("maps.ls.hereapi.com/traffic/") > 0) {
+        return url.replace("maps.ls.hereapi.com/traffic/", "maps.ls.hereapi.com/")
+    } else if (url.indexOf("maps.ls.hereapi.com//aerial/") > 0) {
+        return url.replace("maps.ls.hereapi.com//aerial/", "maps.ls.hereapi.com/")
+    } else if (url.indexOf("maps.ls.hereapi.com//base/") > 0) {
+        return url.replace("maps.ls.hereapi.com//base/", "maps.ls.hereapi.com/")
+    } else if (url.indexOf("maps.ls.hereapi.com//pano/") > 0) {
+        return url.replace("maps.ls.hereapi.com//pano/", "maps.ls.hereapi.com/")
+    } else if (url.indexOf("maps.ls.hereapi.com//traffic/") > 0) {
+        return url.replace("maps.ls.hereapi.com//traffic/", "maps.ls.hereapi.com/")
     }
     // Default "Unchanged URL returned"
     return url;

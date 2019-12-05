@@ -43,9 +43,23 @@ then
     mv dist dist_previous
 fi
 
+if [ -d "functionZips_previous" ] 
+then
+    echo "functionZips_previous directory found, removing it"
+    rm -fr  functionZips_previous
+fi
+cd $azureHLSWorkspaceDir
+if [ -d "functionZips" ] 
+then
+    echo "functionZips directory found, moving to functionZips_previous."
+    mv functionZips functionZips_previous
+fi
+
+
 # Create a new directory structure for Build 
-echo "Creating new dist directory."
+echo "Creating new dist & Zip directory."
 mkdir dist
+mkdir functionZips
 
 # Create directories for Marketplace templates.
 # Below directories will contain compiled code Zip file
@@ -350,6 +364,7 @@ echo "------------------------------------------------------"
     # echo "\t------------------------------"
     mkdir -p $azureHLSWorkspaceDir/dist/azureMarketplacePublishing/hlsSolutionTemplateDataStream/nestedtemplates
     cp $azureHLSWorkspaceDir/armTemplates/102-hlsARMTemplateDataStream/azuredeploy.json $azureHLSWorkspaceDir/dist/azureMarketplacePublishing/hlsSolutionTemplateDataStream/nestedtemplates
+    cp $azureHLSWorkspaceDir/armTemplates/102-hlsARMTemplateDataStream/azuredeployappid.json $azureHLSWorkspaceDir/dist/azureMarketplacePublishing/hlsSolutionTemplateDataStream/nestedtemplates
 
     # c. Copy Serverless function & code zip.
     echo "\tc. Copying deployables"
@@ -378,6 +393,7 @@ echo "------------------------------------------------------"
     # echo "\t------------------------------"
     mkdir -p $azureHLSWorkspaceDir/dist/azureMarketplacePublishing/hlsSolutionTemplateWebAppBackend/nestedtemplates
     cp $azureHLSWorkspaceDir/armTemplates/101-hlsARMTemplateWebAppBackend/azuredeploy.json $azureHLSWorkspaceDir/dist/azureMarketplacePublishing/hlsSolutionTemplateWebAppBackend/nestedtemplates
+    cp $azureHLSWorkspaceDir/armTemplates/101-hlsARMTemplateWebAppBackend/azuredeployappid.json $azureHLSWorkspaceDir/dist/azureMarketplacePublishing/hlsSolutionTemplateWebAppBackend/nestedtemplates
 
     # c. Copy Serverless function & code zip.
     echo "\tc. Copying deployables"
@@ -405,6 +421,7 @@ echo "------------------------------------------------------"
     # echo "\t------------------------------"
     mkdir -p $azureHLSWorkspaceDir/dist/azureMarketplacePublishing/hlsSolutionTemplateServerlessFunction/nestedtemplates
     cp $azureHLSWorkspaceDir/armTemplates/100-hlsARMTemplateServerlessFunctions/azuredeploy.json $azureHLSWorkspaceDir/dist/azureMarketplacePublishing/hlsSolutionTemplateServerlessFunction/nestedtemplates
+    cp $azureHLSWorkspaceDir/armTemplates/100-hlsARMTemplateServerlessFunctions/azuredeployappid.json $azureHLSWorkspaceDir/dist/azureMarketplacePublishing/hlsSolutionTemplateServerlessFunction/nestedtemplates
 
     # c. Copy Serverless function & code zip.
     echo "\tc. Copying deployables"
@@ -426,9 +443,14 @@ echo "------------------------------------------------------"
 cd $azureHLSWorkspaceDir/dist/deployables
 find . -name "*.zip"
 
+
 # On MacOS, .DS_Store within zip reports error on marketplace publishing.
 echo "------------------------------------------------------"
 echo "Checking Zips containing .DS_Store file, no output expected "
 echo "------------------------------------------------------"
 find . -name "*.zip" -exec grep -l ".DS_Store" {} \;
+echo "------------------------------------------------------"
+echo "Updating functionZips Directory with latest zip files."
+echo "------------------------------------------------------"
+cp $azureHLSWorkspaceDir/dist/deployables/serverlesslibrary/*.zip $azureHLSWorkspaceDir/functionZips
 echo "------------------------------------------------------"

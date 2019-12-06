@@ -40,6 +40,7 @@ const app = require("express")();
 const compression = require("compression");
 
 // HERE credentials App_Code and App_Id
+const HERE_AUTH_TYPE = process.env.HERE_AUTH_TYPE;
 const HERE_APP_CODE = process.env.HERE_APP_CODE;
 const HERE_APP_ID = process.env.HERE_APP_ID;
 const HERE_API_KEY = process.env.HERE_API_KEY;
@@ -50,7 +51,7 @@ module.exports = serverlessHandler(app);
 
 let HERE_API_URL = config.urls.HERE_FLEET_TELEMATICS_URL;
 // API URL
-if (HERE_API_KEY != "" ){
+if (HERE_AUTH_TYPE == "apikey"){
     HERE_API_URL = config.authUrls.HERE_FLEET_TELEMATICS_URL;
 }
 
@@ -60,11 +61,11 @@ app.all("/api/fleet/*", asyncMiddleware(async(req, res) => {
     let logger = loggers.getLogger(req);
 
     // Process Request Object and Prepare Proxy URL using HERE APP Credentials. 
-    if (HERE_APP_ID != "") {
-        proxyUrl = reqProcessor.processRequest(logger, req, HERE_APP_CODE, HERE_APP_ID, HERE_API_URL);
+    if ( HERE_AUTH_TYPE == "apikey" ){
+        proxyUrl = reqProcessor.processRequest(logger, req, HERE_API_KEY, HERE_API_URL);
     }
     else  { 
-        proxyUrl = reqProcessor.processRequest(logger, req, HERE_API_KEY, HERE_API_URL);
+        proxyUrl = reqProcessor.processRequest(logger, req, HERE_APP_CODE, HERE_APP_ID, HERE_API_URL);
     }
 
     // Invoke Proxy URL and fetch Response, GET/POST call is decided based on incoming method.

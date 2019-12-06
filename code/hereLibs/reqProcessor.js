@@ -93,33 +93,33 @@ async function getAPIResult(log, req, proxyUrl) {
 }
 
 // Dynamically build HERE API URL to be used by various apis.
-function buildHereApiUrl(req) {
+function buildHereApiUrl(req,authType) {
     var url = ""
 
     switch (req.api) {
         case "places":
-            url = getPlacesApiUrl();
+            url = getPlacesApiUrl(authType);
             break;
         case "routing":
-            url = getRoutingApiUrl(req);
+            url = getRoutingApiUrl(req,authType);
             break;
         case "positioning":
-            url = getPositioningApiUrl();
+            url = getPositioningApiUrl(authType);
             break;
         case "map_tile/aerial":
         case "map_tile/base":
         case "map_tile/pano":
         case "map_tile/traffic":
-            url = getMapTileApiUrl(req);
+            url = getMapTileApiUrl(req,authType);
             break;
         case "fleet":
-            url = getFleetTelematicsUrl();
+            url = getFleetTelematicsUrl(authType);
             break;
         case "map_image":
-            url = getMapImageUrl();
+            url = getMapImageUrl(authType);
             break;
         case "geocoder":
-            url = getGeocoderUrl(req);
+            url = getGeocoderUrl(req,authType);
             break;
 
         default:
@@ -130,55 +130,62 @@ function buildHereApiUrl(req) {
     req._config.HERE_API_URL = url;
     return true;
 }
-
-function getRoutingApiUrl(req) {
+function getUrlSource(authType){
+    if ( authType == "apikey" ) {
+        return config.authUrls;
+    }else {
+        return config.urls;
+    }
+}
+function getRoutingApiUrl(req,authType) {
+   
     var url = ""
     if (req.url.indexOf("calculateisoline") > 0) {
-        url = config.urls.HERE_ROUTING_ISOLINE_URL;
+        url = getUrlSource(authType).HERE_ROUTING_ISOLINE_URL;
     } else if (req.url.indexOf("calculatematrix") > 0) {
-        url = config.urls.HERE_ROUTING_MATRIX_URL;
+        url = getUrlSource(authType).HERE_ROUTING_MATRIX_URL;
     } else {
-        url = config.urls.HERE_ROUTING_URL;
+        url = getUrlSource(authType).HERE_ROUTING_URL;
     }
     return url;
 }
 
-function getPlacesApiUrl() {
-    return config.urls.HERE_PLACES_URL;
+function getPlacesApiUrl(authType) {
+    return getUrlSource(authType).HERE_PLACES_URL;
 }
 
-function getPositioningApiUrl() {
-    return config.urls.HERE_POS_URL;
+function getPositioningApiUrl(authType) {
+    return getUrlSource(authType).HERE_POS_URL;
 }
 
-function getMapTileApiUrl(req) {
+function getMapTileApiUrl(req,authType) {
 
     let randomServer = chooseRandomServer();
     if (req.api == "map_tile/aerial") {
-        return config.urls.HERE_MAPTILE_AERIAL_URL.replace("1TO4", randomServer.toString())
+        return getUrlSource(authType).HERE_MAPTILE_AERIAL_URL.replace("1TO4", randomServer.toString())
     } else if (req.api == "map_tile/base") {
-        return config.urls.HERE_MAPTILE_BASE_URL.replace("1TO4", randomServer.toString());
+        return getUrlSource(authType).HERE_MAPTILE_BASE_URL.replace("1TO4", randomServer.toString());
     } else if (req.api == "map_tile/pano") {
-        return config.urls.HERE_MAPTILE_PANO_URL.replace("1TO4", randomServer.toString());
+        return getUrlSource(authType).HERE_MAPTILE_PANO_URL.replace("1TO4", randomServer.toString());
     } else if (req.api == "map_tile/traffic") {
-        return config.urls.HERE_MAPTILE_TRAFFIC_URL.replace("1TO4", randomServer.toString());
+        return getUrlSource(authType).HERE_MAPTILE_TRAFFIC_URL.replace("1TO4", randomServer.toString());
     }
     return "NOTFOUND" // Default to ""(empty str) .
 }
 
-function getFleetTelematicsUrl() {
-    return config.urls.HERE_FLEET_TELEMATICS_URL;
+function getFleetTelematicsUrl(authType) {
+    return getUrlSource(authType).HERE_FLEET_TELEMATICS_URL;
 }
 
-function getMapImageUrl() {
-    return config.urls.HERE_MAP_IMAGE_URL
+function getMapImageUrl(authType) {
+    return getUrlSource(authType).HERE_MAP_IMAGE_URL
 }
 
-function getGeocoderUrl(req) {
+function getGeocoderUrl(req,authType) {
     if (req.url.indexOf("reversegeocode") >= 0) {
-        return config.urls.HERE_REVERSE_GEOCODER_URL;
+        return getUrlSource(authType).HERE_REVERSE_GEOCODER_URL;
     } else {
-        return config.urls.HERE_GEOCODER_URL;
+        return getUrlSource(authType).HERE_GEOCODER_URL;
     }
 }
 

@@ -2,7 +2,7 @@
 
 Deploys collection of 7 HERE APIs as HTTP trigger serverless functions.
 
- <a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fnavinmistry%2Fhere-azure-serverless%2Fmaster%2FarmTemplates%2F100-hlsARMTemplateServerlessFunctions%2Fazuredeploy.json" target="_blank">
+ <a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fheremaps%2Fhere-azure-serverless%2Fmaster%2FarmTemplates%2F100-hlsARMTemplateServerlessFunctions%2Fazuredeploy.json" target="_blank">
     <img src="http://azuredeploy.net/deploybutton.png"/>
 </a>
 

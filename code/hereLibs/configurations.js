@@ -54,9 +54,8 @@ let urls = {
 };
 
 // New Urls are to be used for APIKey or Authentication using token.
-let newUrls = {
+let authUrls = {
     // Make sure that configured URLs always end with trailing '/' char.
-
     // Position API URL
     "HERE_POS_URL": 'https://pos.ls.hereapi.com/positioning/',
 
@@ -105,7 +104,7 @@ let cosmosDB = {
     // 1. azure  -> azure-funciton-express
     // 2. azure-aws ->azure-aws-serverless-express
 
-let serverlessExpressHandler = "azure-aws";
+let serverlessExpressHandler = "azure";
 
 // httpClient , this is used to call proxy HERE API URL and to get the response back.
 // Available options are 
@@ -122,6 +121,7 @@ let loggerEnabled = true;
 
 module.exports = {
     urls: urls,
+    authUrls: authUrls,
     serverlessExpressHandler: serverlessExpressHandler,
     httpClient: httpClient,
     loggerEnabled: loggerEnabled,

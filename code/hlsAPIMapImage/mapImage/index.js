@@ -29,9 +29,7 @@ const loggers = require("../hereLibs/logger");
 const app = require("express")();
 const compression = require("compression");
 
-// HERE credentials App_Code and App_Id
-const HERE_APP_CODE = process.env.HERE_APP_CODE;
-const HERE_APP_ID = process.env.HERE_APP_ID;
+// HERE credentials API Key
 const HERE_API_KEY = process.env.HERE_API_KEY;
 
 // Binds the express app to an Azure Function handler
@@ -39,12 +37,7 @@ app.use(compression());
 module.exports = serverlessHandler(app);
 
 // API URL
-let HERE_API_URL = config.urls.HERE_MAP_IMAGE_URL;
-// API URL
-if (HERE_API_KEY != "" ){
-    HERE_API_URL = config.authUrls.HERE_MAP_IMAGE_URL;
-}
-let proxyUrl = "";
+const HERE_API_URL = config.authUrls.HERE_MAP_IMAGE_URL;
 
 app.all("/api/map_image/*", asyncMiddleware(async(req, res) => {
 
@@ -52,19 +45,13 @@ app.all("/api/map_image/*", asyncMiddleware(async(req, res) => {
     let logger = loggers.getLogger(req);
 
     // Process Request Object and Prepare Proxy URL using HERE APP Credentials. 
-    if (HERE_APP_ID != "") {
-        proxyUrl = reqProcessor.processRequest(logger, req, HERE_APP_CODE, HERE_APP_ID, HERE_API_URL);
-    }
-    else  { 
-        proxyUrl = reqProcessor.processRequest(logger, req, HERE_API_KEY, HERE_API_URL);
-    }
+    let proxyUrl = reqProcessor.processRequest(logger, req, HERE_API_KEY, HERE_API_URL);
 
     // Invoke Proxy URL and fetch Response, GET/POST call is decided based on incoming method.
     let result = await reqProcessor.getAPIResult(logger, req, proxyUrl);
 
     // Set the Response Object Headers ,StatusCode  and Response Body.
     reqProcessor.sendResponse(logger, req, res, result);
-
 
 }));
 

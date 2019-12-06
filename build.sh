@@ -199,7 +199,7 @@ echo "------------------------------------------------------"
     echo "\ta. Copying code content."
     # echo "\t------------------------------"
     cp -R $azureHLSWorkspaceDir/code/hlsAPIFleetTelematics/* $azureHLSWorkspaceDir/dist/azureServerless/hlsAPIFleetTelematics
-    cp -R $azureHLSWorkspaceDir/code/hlsTemplateServerlessFunction/fleetTelematics $azureHLSWorkspaceDir/dist/azureServerless/hlsAPIFleetTelematics
+    #cp -R $azureHLSWorkspaceDir/code/hlsTemplateServerlessFunction/fleetTelematics $azureHLSWorkspaceDir/dist/azureServerless/hlsAPIFleetTelematics
     cp -R $azureHLSWorkspaceDir/code/hereLibs $azureHLSWorkspaceDir/dist/azureServerless/hlsAPIFleetTelematics
 
     # b. Installing dependencies.
@@ -221,7 +221,7 @@ echo "------------------------------------------------------"
     echo "\ta. Copying code content."
     # echo "\t------------------------------"
     cp -R $azureHLSWorkspaceDir/code/hlsAPIGeocoder/* $azureHLSWorkspaceDir/dist/azureServerless/hlsAPIGeocoder
-    cp -R $azureHLSWorkspaceDir/code/hlsTemplateServerlessFunction/geocoder $azureHLSWorkspaceDir/dist/azureServerless/hlsAPIGeocoder
+    #cp -R $azureHLSWorkspaceDir/code/hlsTemplateServerlessFunction/geocoder $azureHLSWorkspaceDir/dist/azureServerless/hlsAPIGeocoder
     cp -R $azureHLSWorkspaceDir/code/hereLibs $azureHLSWorkspaceDir/dist/azureServerless/hlsAPIGeocoder
 
 
@@ -244,7 +244,7 @@ echo "------------------------------------------------------"
     echo "\ta. Copying code content."
     # echo "\t------------------------------"
     cp -R $azureHLSWorkspaceDir/code/hlsAPIMapImage/* $azureHLSWorkspaceDir/dist/azureServerless/hlsAPIMapImage
-    cp -R $azureHLSWorkspaceDir/code/hlsTemplateServerlessFunction/mapImage $azureHLSWorkspaceDir/dist/azureServerless/hlsAPIMapImage
+    #cp -R $azureHLSWorkspaceDir/code/hlsTemplateServerlessFunction/mapImage $azureHLSWorkspaceDir/dist/azureServerless/hlsAPIMapImage
     cp -R $azureHLSWorkspaceDir/code/hereLibs $azureHLSWorkspaceDir/dist/azureServerless/hlsAPIMapImage
 
     # b. Installing dependencies.
@@ -266,7 +266,7 @@ echo "------------------------------------------------------"
     echo "\ta. Copying code content."
     # echo "\t------------------------------"
     cp -R $azureHLSWorkspaceDir/code/hlsAPIMapTile/* $azureHLSWorkspaceDir/dist/azureServerless/hlsAPIMapTile
-    cp -R $azureHLSWorkspaceDir/code/hlsTemplateServerlessFunction/mapTile $azureHLSWorkspaceDir/dist/azureServerless/hlsAPIMapTile
+    #cp -R $azureHLSWorkspaceDir/code/hlsTemplateServerlessFunction/mapTile $azureHLSWorkspaceDir/dist/azureServerless/hlsAPIMapTile
     cp -R $azureHLSWorkspaceDir/code/hereLibs $azureHLSWorkspaceDir/dist/azureServerless/hlsAPIMapTile
 
     # b. Installing dependencies.
@@ -288,7 +288,7 @@ echo "------------------------------------------------------"
     echo "\ta. Copying code content."
     # echo "\t------------------------------"
     cp -R $azureHLSWorkspaceDir/code/hlsAPIPlaces/* $azureHLSWorkspaceDir/dist/azureServerless/hlsAPIPlaces
-    cp -R $azureHLSWorkspaceDir/code/hlsTemplateServerlessFunction/places $azureHLSWorkspaceDir/dist/azureServerless/hlsAPIPlaces
+    #cp -R $azureHLSWorkspaceDir/code/hlsTemplateServerlessFunction/places $azureHLSWorkspaceDir/dist/azureServerless/hlsAPIPlaces
     cp -R $azureHLSWorkspaceDir/code/hereLibs $azureHLSWorkspaceDir/dist/azureServerless/hlsAPIPlaces
 
     # b. Installing dependencies.
@@ -310,7 +310,7 @@ echo "------------------------------------------------------"
     echo "\ta. Copying code content."
     # echo "\t------------------------------"
     cp -R $azureHLSWorkspaceDir/code/hlsAPIPositioning/* $azureHLSWorkspaceDir/dist/azureServerless/hlsAPIPositioning
-    cp -R $azureHLSWorkspaceDir/code/hlsTemplateServerlessFunction/positioning $azureHLSWorkspaceDir/dist/azureServerless/hlsAPIPositioning
+    #cp -R $azureHLSWorkspaceDir/code/hlsTemplateServerlessFunction/positioning $azureHLSWorkspaceDir/dist/azureServerless/hlsAPIPositioning
     cp -R $azureHLSWorkspaceDir/code/hereLibs $azureHLSWorkspaceDir/dist/azureServerless/hlsAPIPositioning
 
      # b. Installing dependencies.
@@ -332,7 +332,7 @@ echo "------------------------------------------------------"
     echo "\ta. Copying code content."
     # echo "\t------------------------------"
     cp -R $azureHLSWorkspaceDir/code/hlsAPIRouting/* $azureHLSWorkspaceDir/dist/azureServerless/hlsAPIRouting
-    cp -R $azureHLSWorkspaceDir/code/hlsTemplateServerlessFunction/routing $azureHLSWorkspaceDir/dist/azureServerless/hlsAPIRouting
+    #cp -R $azureHLSWorkspaceDir/code/hlsTemplateServerlessFunction/routing $azureHLSWorkspaceDir/dist/azureServerless/hlsAPIRouting
     cp -R $azureHLSWorkspaceDir/code/hereLibs $azureHLSWorkspaceDir/dist/azureServerless/hlsAPIRouting
 
      # b. Installing dependencies.
@@ -453,4 +453,5 @@ echo "------------------------------------------------------"
 echo "Updating functionZips Directory with latest zip files."
 echo "------------------------------------------------------"
 cp $azureHLSWorkspaceDir/dist/deployables/serverlesslibrary/*.zip $azureHLSWorkspaceDir/functionZips
+cp $azureHLSWorkspaceDir/dist/deployables/azureMarketplacePublishing/hlsSolutionTemplate*.zip $azureHLSWorkspaceDir/functionZips
 echo "------------------------------------------------------"

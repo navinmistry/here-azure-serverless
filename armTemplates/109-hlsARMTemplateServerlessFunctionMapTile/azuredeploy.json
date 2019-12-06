@@ -11,7 +11,7 @@
     }  
   },
   "variables": {
-    "functionZipPackageUrl" :"https://raw.githubusercontent.com/heremaps/here-azure-serverless/master/functionZips/hlsAPIMapTile.zip",
+    "functionZipPackageUrl" :"https://raw.githubusercontent.com/navinmistry/here-azure-serverless/master/functionZips/hlsAPIMapTile.zip",
     "functionAppName": "[concat('hlsapp', uniqueString(resourceGroup().id))]",
     "storageName" : "[concat('storage', uniqueString(resourceGroup().id))]",
     "location" : "[resourceGroup().location]"

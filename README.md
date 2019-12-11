@@ -133,24 +133,24 @@ Below table shows how an existing HERE API URL can be mapped to Azure Function U
 |-------------------- |-------------------------------------------------|-----------------------------------------------------------|
 |Geocoder             | `https://geocoder.ls.hereapi.com/`              |  `https://<fnAppName>.azurewebsites.net/api/geocoder/` |
 |Geocoder             | `https://geocoder.api.here.com/`                |  `https://<fnAppName>.azurewebsites.net/api/geocoder/`
-
+|
 |Images               | `https://image.ls.hereapi.com/`                 |  `https://<fnAppName>.azurewebsites.net/api/map_image/`
 |Images               | `https://image.maps.api.here.com/`              |  `https://<fnAppName>.azurewebsites.net/api/map_image/`
-
+|
 |MapTile              | `https://{1-4}.traffic.maps.ls.hereapi.com/`    |  `https://<fnAppName>.azurewebsites.net/api/map_tile/traffic/`
 |MapTile              | `https://{1-4}.traffic.maps.api.here.com/`      |  `https://<fnAppName>.azurewebsites.net/api/map_tile/traffic/`
 |MapTile              | `https://{1.4}.base.maps.ls.hereapi.com/`       |  `https://<fnAppName>.azurewebsites.net/api/map_tile/base/`
 |MapTile              | `https://{1.4}.base.maps.api.here.com/`         |  `https://<fnAppName>.azurewebsites.net/api/map_tile/base/`
-
+|
 |Places               | `https://places.api.here.com/places/`           |  `https://<fnAppName>.azurewebsites.net/api/places/`
 |Places               | `https://places.ls.hereapi.com/places/`         |  `https://<fnAppName>.azurewebsites.net/api/places/`
-
+|
 |Positioning          | `https://pos.ls.hereapi.com/positioning/`       |  `https://<fnAppName>.azurewebsites.net/api/positioning/`
 |Positioning          | `https://pos.api.here.com/positioning/`         |  `https://<fnAppName>.azurewebsites.net/api/positioning/`
-
+|
 |Routing              | `https://route.ls.hereapi.com/`                 |  `https://<fnAppName>.azurewebsites.net/api/routing/`
 |Routing              | `https://route.api.here.com/`                   |  `https://<fnAppName>.azurewebsites.net/api/routing/`
-
+|
 |Fleet Telematics     | `https://fleet.ls.hereapi.com/`                 |  `https://<fnAppName>.azurewebsites.net/api/fleet`
 |Fleet Telematics     | `https://fleet.api.here.com/`                   |  `https://<fnAppName>.azurewebsites.net/api/fleet`
 

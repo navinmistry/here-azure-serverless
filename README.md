@@ -139,15 +139,15 @@ URL Mapping
 
 
 An example of a HTTP GET request to the HERE Geocoder API:  
-`**https://geocoder.ls.hereapi.com/**6.2/geocode.json?searchtext=425+W+Randolph+Chicago&apikey=<apikey>`  
+`https://geocoder.ls.hereapi.com/6.2/geocode.json?searchtext=425+W+Randolph+Chicago&apikey=<apikey>`  
 
-`**https://geocoder.api.here.com/**6.2/geocode.json?searchtext=425+W+Randolph+Chicago&appID=<appID>&app_code=<appCode>`   
+`https://geocoder.api.here.com/6.2/geocode.json?searchtext=425+W+Randolph+Chicago&appID=<appID>&app_code=<appCode>`   
 
 To call the Function Proxy, replace the original URL with the API Gateway URL and change the Query String Parameters as shown in the following example. 
 
 An example of a HTTP GET request to the equivalent Azure Function Proxy: 
 
-`**https://<fnAppName>.azurewebsites.net/api/geocoder/**6.2/geocode.json?searchtext=425+W+Randolph+Chicago`
+`https://<fnAppName>.azurewebsites.net/api/geocoder/6.2/geocode.json?searchtext=425+W+Randolph+Chicago`
 
 ### Map Image API
 URL Mapping 

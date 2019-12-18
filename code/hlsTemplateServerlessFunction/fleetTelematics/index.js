@@ -62,10 +62,10 @@ app.all("/api/fleet/*", asyncMiddleware(async(req, res) => {
 
     // Process Request Object and Prepare Proxy URL using HERE APP Credentials. 
     if ( HERE_AUTH_TYPE == "apikey" ){
-        proxyUrl = reqProcessor.processRequest(logger, req, HERE_API_KEY, HERE_API_URL);
+        proxyUrl = reqProcessor.processRequestAuthKey(logger, req, HERE_API_KEY, HERE_API_URL);
     }
     else  { 
-        proxyUrl = reqProcessor.processRequest(logger, req, HERE_APP_CODE, HERE_APP_ID, HERE_API_URL);
+        proxyUrl = reqProcessor.processRequestAuthID(logger, req, HERE_APP_CODE, HERE_APP_ID, HERE_API_URL);
     }
 
     // Invoke Proxy URL and fetch Response, GET/POST call is decided based on incoming method.

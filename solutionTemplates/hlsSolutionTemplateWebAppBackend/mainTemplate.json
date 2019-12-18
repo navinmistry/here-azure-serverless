@@ -40,7 +40,6 @@
 
     },
     "resources": [{
-        "condition": "[equals(parameters('authType'), 'apikey')]",
         "type": "Microsoft.Resources/deployments",
         "apiVersion": "2018-02-01",
         "name": "pid-42755d19-4ad3-5fc0-a887-72ea2006a990",

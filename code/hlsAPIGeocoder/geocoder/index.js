@@ -48,7 +48,7 @@ app.all("/api/geocoder/*", asyncMiddleware(async(req, res) => {
     let logger = loggers.getLogger(req);
 
     // Process Request Object and Prepare Proxy URL using HERE APP Credentials.
-    let proxyUrl = reqProcessor.processRequest(logger, req, HERE_API_KEY, HERE_API_URL);
+    let proxyUrl = reqProcessor.processRequestAuthKey(logger, req, HERE_API_KEY, HERE_API_URL);
     
     // Invoke Proxy URL and fetch Response, GET/POST call is decided based on incoming method.
     let result = await reqProcessor.getAPIResult(logger, req, proxyUrl);

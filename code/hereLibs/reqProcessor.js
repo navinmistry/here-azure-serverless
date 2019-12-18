@@ -189,7 +189,7 @@ function getGeocoderUrl(req,authType) {
     }
 }
 
-function processRequest(log, req, HERE_APP_CODE, HERE_APP_ID, HERE_API_URL) {
+function processRequestAuthID(log, req, HERE_APP_CODE, HERE_APP_ID, HERE_API_URL) {
 
     // Log Environment Variable & Values.
     log(`[HERE_APP_ID]            : [${HERE_APP_ID}]`);
@@ -220,7 +220,7 @@ function processRequest(log, req, HERE_APP_CODE, HERE_APP_ID, HERE_API_URL) {
 
     return proxy_url;
 }
-function processRequest(log, req, HERE_API_KEY, HERE_API_URL) {
+function processRequestAuthKey(log, req, HERE_API_KEY, HERE_API_URL) {
 
     // Log Environment Variable & Values.
     log(`[HERE_API_KEY]            : [${HERE_API_KEY}]`);
@@ -346,7 +346,8 @@ function sanitizieUrl(url) {
 }
 
 module.exports = {
-    processRequest: processRequest,
+    processRequestAuthID: processRequestAuthID,
+    processRequestAuthKey: processRequestAuthKey,
     sendResponse: sendResponse,
     classifyRespFormat: classifyRespFormat,
     getAPIResult: getAPIResult,

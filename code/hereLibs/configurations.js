@@ -101,10 +101,10 @@ let cosmosDB = {
     }
     // serverlessExpressHandler ( possible express serverless module to be used.)
     // Available options are 
-    // 1. azure  -> azure-funciton-express
+    // 1. azure  -> azure-funciton-express #intermittent bugs present
     // 2. azure-aws ->azure-aws-serverless-express
 
-let serverlessExpressHandler = "azure";
+let serverlessExpressHandler = "azure-aws";
 
 // httpClient , this is used to call proxy HERE API URL and to get the response back.
 // Available options are 

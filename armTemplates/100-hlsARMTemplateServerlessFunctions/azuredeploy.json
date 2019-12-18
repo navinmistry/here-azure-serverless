@@ -101,7 +101,7 @@
                         },
                         {
                             "name": "WEBSITE_NODE_DEFAULT_VERSION",
-                            "value": "8.11.1"
+                            "value": "10.14.1"
                         },
                         {
                             "name": "HERE_AUTH_TYPE",
@@ -173,7 +173,7 @@
                         },
                         {
                             "name": "WEBSITE_NODE_DEFAULT_VERSION",
-                            "value": "8.11.1"
+                            "value": "10.14.1"
                         },
                         {
                             "name": "HERE_AUTH_TYPE",
